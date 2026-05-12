@@ -43,21 +43,20 @@ class Block:
   def next( previous, data="Transaction Data..." ):
     return Block( previous.index + 1, data, previous.hash )
 
+def build_sample_chain():
+  """Build the example chain used when the script is run directly."""
+  b0 = Block.first( "Genesis" )
+  b1 = Block.next( b0, "Transaction Data..." )
+  b2 = Block.next( b1, "Transaction Data......" )
+  b3 = Block.next( b2, "More Transaction Data..." )
+  return [b0, b1, b2, b3]
 
 
-#####
-## let's get started
-##   build a blockchain a block at a time
-
-b0 = Block.first( "Genesis" )
-b1 = Block.next( b0, "Transaction Data..." )
-b2 = Block.next( b1, "Transaction Data......" )
-b3 = Block.next( b2, "More Transaction Data..." )
-
-
-blockchain = [b0, b1, b2, b3]
-
-pprint.pprint( blockchain )
+if __name__ == "__main__":
+  #####
+  ## let's get started
+  ##   build a blockchain a block at a time
+  pprint.pprint( build_sample_chain() )
 
 ######
 #  will pretty print something like:
